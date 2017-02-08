@@ -32,3 +32,7 @@ else{
 	console.log("no min");
 }
 }
+function tt3(){
+  for (var str = "#"; str.length < 8; str ++)
+    console.log(str);
+}      
