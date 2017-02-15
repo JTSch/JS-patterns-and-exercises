@@ -37,3 +37,16 @@ function tt3(){
     console.log(str);
 }
 
+// 3.1. Минимум 
+function min(a, b) {
+  return a < b ?  a : b;
+}
+console.log(min(a, b))
+
+//3.2. Рекурсия
+function IsEven(n) {
+return n % 2 == 0 ? true : false;
+  if (n < 0) return IsEven(-n);
+  else return IsEven(n-2);
+ }
+console.log(IsEven(n))
