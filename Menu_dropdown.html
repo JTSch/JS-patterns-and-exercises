@@ -1,0 +1,45 @@
+<body>
+  <style>
+    
+    span, .menu:before {
+      cursor: pointer;
+    }
+    .menu:before {
+      content: "▶ ";
+    }
+    
+    .menu.open:before {
+      content: "▼ ";
+    }
+    
+    .menu ul {
+      visibility: hidden;
+    }
+    
+    .menu.open ul {
+      visibility: visible;
+    }
+    
+    
+  </style>
+
+  <div id="list" class="menu">
+  <span>Меню</span>
+  <ul>
+    <li>Купить</li>
+    <li>Продать</li>
+    <li>Арендовать</li>
+  </ul>
+  </div>
+
+<script>
+var list = document.getElementById('list');
+list.addEventListener("click", openMenu);
+
+function openMenu() {
+  list.classList.toggle('open');
+}
+
+  
+</script>
+</body>
