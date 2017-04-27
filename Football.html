@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #field {
+      width: 400px;
+      height: 200px;
+      border: 10px groove black;
+      background-color: #3fb710;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    #ball {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -20px;
+      margin-top: -20px;
+      transition: all 150ms;
+      -moz-transition: all 150ms;
+      -ms-transition: all 150ms;
+      -o-transition: all 150ms;
+      -webkit-transition: all 150ms;
+    }
+  </style>
+</head>
+
+<body style="height:2000px">
+
+  Кликните на любое место поля, чтобы мяч перелетел туда.
+  <br> Мяч никогда не вылетит за границы поля.
+
+
+  <div id="field">
+    <img src="https://js.cx/clipart/ball.svg" id="ball"> 
+  </div>
+  <div id="ball"></div>
+
+<script>
+//почему-то работает без ballTop = event.clientY - field.InnerCoords.top - ball.clientHeight / 2; 
+//поработать над изменением размеров мяча
+  var 
+  ball = document.getElementById('ball'),
+  field = document.getElementById('field');
+  ball.style.width = "40px";
+  field.onclick = function(event) {
+    var fieldCoords = this.getBoundingClientRect();
+    
+    field.InnerCoords = {
+      top: fieldCoords.top + field.clientTop,
+      left: fieldCoords.left + field.clientLeft
+    };
+    
+    ballTop = event.clientY - field.InnerCoords.top;
+    if (ballTop < ball.clientHeight / 2) {
+      ball.style.top = ball.clientHeight / 2 + "px";
+    } else ball.style.top = ballTop + "px";
+    
+    ballLeft = event.clientX - field.InnerCoords.left;
+    if (ballLeft < ball.clientWidth / 2) {
+      ball.style.left = ball.clientWidth / 2 + "px";
+    } else ball.style.left = ballLeft + "px";
+    
+  if (ballLeft + ball.clientWidth > field.clientWidth) {
+    ball.style.left = field.clientWidth - ball.clientWidth / 2 + 'px'
+  }; 
+  if (ballTop + ball.clientHeight > field.clientHeight) {
+    ball.style.top = field.clientHeight - ball.clientHeight / 2 + 'px'
+  }; 
+  }
+</script>
+
+</body>
+
+</html>
