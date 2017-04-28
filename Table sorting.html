@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    th {
+      cursor: pointer;
+    }
+
+    th:hover {
+      background: yellow;
+    }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+        <th data-type="string">Фамилия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>Вася</td>
+        <td>Иванов</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Петя</td>
+        <td>Петров</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Женя</td>
+        <td>Сидоров</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Маша</td>
+        <td>Склярова</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Илья</td>
+        <td>Зубов</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    var tHead = document.getElementsByTagName('thead')[0];
+    tHead.onclick = function (event) {
+      var target = event.target;
+      var cellNum = target.cellIndex;
+      
+      if (target.getAttribute("data-type") == "number") {
+        function sortRows(rowA, rowB){
+          return rowA.cells[cellNum].innerHTML - rowB.cells[cellNum].innerHTML;
+        }; 
+      };
+      if (target.getAttribute("data-type") == "string") {
+        function sortRows(rowA, rowB){
+          return rowA.cells[cellNum].innerHTML > rowB.cells[cellNum].innerHTML;
+        }
+      };
+      
+      var tbody = document.getElementsByTagName('tbody')[0],
+      rowsArr = [].slice.call(tbody.rows), //method borrowing
+      rowsArrSorted = rowsArr.sort(sortRows);
+      for (var i=0; i<rowsArrSorted.length; i++) {
+        tbody.appendChild(rowsArrSorted[i]);
+      };  
+      
+      /*arr = []; //using arrow, without method borrowing
+      for(var i=0; i<tbody.rows.length; i++) {
+        arr.push(tbody.rows[i]);
+        var rowsArrSorted = arr.sort(sortRows);
+        for (var i=0; i<rowsArrSorted.length; i++) {
+          tbody.appendChild(rowsArrSorted[i]);
+      };
+      };*/
+
+
+      
+    }   
+
+  </script>
+
+</body>
+
+</html>
