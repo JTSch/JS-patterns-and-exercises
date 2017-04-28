@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+    }
+    
+    .pop-up {
+      position: fixed;
+      border: 1px solid #6c6e70;
+      background-color: #fff;
+      font: italic 12px Arial, Helvetica, sans-serif;
+      color: #5d5f60;
+      box-shadow: 5px 5px 10px -2px rgba(0,0,0,0.2);
+      border-radius: 5px;
+      padding: 10px 20px;
+      text-align: center;
+      
+    }
+    
+  </style>
+</head>
+
+<body>
+<h2>Bla-bla title</h2>
+<p>
+  bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-bla-<br>bla-bla-bla-bla-bla-bla
+</p>
+  
+
+  <button data-tooltip="Long text of a long buttom">Longer button</button>
+  <button data-tooltip="HTML<br>tooltip">Button</button>
+
+  
+
+
+  <script>
+    var note = document.createElement('div');
+    
+    document.onmouseover = function(event) {
+      var target = event.target;
+      if (!target.hasAttribute('data-tooltip')) return;
+      
+      document.body.appendChild(note);
+      note.innerHTML = target.getAttribute('data-tooltip');
+      note.classList.add('pop-up');
+      
+      var coords = target.getBoundingClientRect();
+      var noteLeft = coords.left + (target.offsetWidth - note.offsetWidth) / 2;
+      if (noteLeft < 0) noteLeft = 0;
+      var noteTop = coords.top - note.offsetHeight - 5; 
+      if (noteTop < 0) {
+        noteTop = coords.top + target.offsetHeight + 5;
+      }
+      note.style.left = noteLeft + 'px';
+      note.style.top = noteTop + 'px';
+      
+    }
+    document.onmouseout = function(event) {
+      if (!event.target.hasAttribute('data-tooltip')) return;
+      
+      document.body.removeChild(note);
+    }
+    
+  </script>
+
+</body>
+
+</html>
